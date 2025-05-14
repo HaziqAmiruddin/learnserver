@@ -22,37 +22,67 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 const express = require('express');
+//middleware
+const bodyParser = require('body-parser');
 
 const app = express();
 
+//middleware
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
+//forstatic
+app.use(express.static(__dirname + '/public'))
+
 app.use((req, res, next) => {
-    console.log('HELLOOOO')
+    console.log('how about now ?')
     next();
 })
 
-app.get('/', (req, res) => {
-    // res.send("hellloooooo heeeloooo");
-    const user = {
-        name : 'Sally',
-        hobby : 'Soccer'
-    }
-    res.send(user);
-})
+// app.get('/', (req, res) => {
+//     // res.send("hellloooooo heeeloooo");
+//     const user = {
+//         name : 'Sally',
+//         hobby : 'Soccer'
+//     }
+//     res.send(user);
+// })
 
-app.get('/', (req, res) => {
-    res.send("getting root");
-})
+// app.get('/', (req, res) => {
+//     res.send("getting root");
+// })
 
-app.get('/profile', (req, res) => {
-    res.send("getting profile");
-})
+app.get('/:id', (req, res) => {
+    //res.send("getting profile");
+    //restfulAPI
+    // req.query
+    // console.log(req.query);
+
+    // req.body
+
+    // req.header
+    // console.log(req.header)
+    // res.send("getting root");
+
+    // req.params
+    console.log(req.params)
+    // res.send("getting root");
+    res.status(404).send("not found");
+});
 
 app.post('/profile', (req, res) => {
     // res.send("hellloooooo heeeloooo");
-    const user = {
-        name : 'Sally',
-        hobby : 'Soccer'
-    }
-    res.send(user);
+
+    console.log(req.body)
+    // const user = {
+    //     name : 'Sally',
+    //     hobby : 'Soccer'
+    // }
+    // res.send(user);
+
+    // res.send(user);
+
+    res.send('seccedd');
+
+
 })
 app.listen(3000);
